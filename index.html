@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Kanban Task Management</title>
+    <script type="module" src="./js/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <nav class="side-bar" id="side-bar">
+      <div id="side-logo-div">
+        <img id="logo" src="./assets/logo-light.svg" alt="kanban" />
+      </div>
+
+      <div class="boards-nav-links-div">
+        <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+        <button class="board-btn" type="button">Launch Career</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="theme-card">
+          <img src="./assets/icon-light-theme.svg" alt="light" />
+          <label class="switch" aria-label="Toggle dark mode">
+            <input id="theme-switch" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+          <img src="./assets/icon-dark-theme.svg" alt="dark" />
+        </div>
+
+        <button id="hide-sidebar" class="hide-sidebar-btn" type="button">
+          <img src="./assets/icon-hide-sidebar.svg" alt="" />
+          Hide Sidebar
+        </button>
+      </div>
+    </nav>
+
+    <!-- Quick show button after hiding sidebar -->
+    <button
+      id="show-sidebar"
+      class="show-sidebar-btn"
+      type="button"
+      title="Show sidebar"
+    >
+      <img src="./assets/icon-show-sidebar.svg" alt="show" />
+    </button>
+
+    <!-- Main -->
+    <div id="layout">
+      <header id="header">
+        <div class="header-name-div">
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
+          <img src="./assets/favicon.svg" alt="kanban" class="logo-mobile" />
+          <h2 class="header-board-name" id="header-board-name">
+            Launch Career
+          </h2>
+        </div>
+
+        <button
+          id="open-create-modal"
+          class="add-task-btn"
+          aria-label="Add New Task"
+        >
+          <span class="add-task-btn__plus">+</span>
+          <span class="add-task-btn__text">Add New Task</span>
+        </button>
+      </header>
+
+      <div class="container">
+        <main class="card-column-main">
+          <!-- TODO -->
+          <div class="column-div" data-status="todo">
+            <div class="column-head-div">
+              <span class="dot" id="todo-dot"></span>
+              <h4 id="toDoText" class="columnHeader">TODO (0)</h4>
+            </div>
+            <div class="tasks-container"></div>
+          </div>
+
+          <!-- DOING -->
+          <div class="column-div" data-status="doing">
+            <div class="column-head-div">
+              <span class="dot" id="doing-dot"></span>
+              <h4 id="doingText" class="columnHeader">DOING (0)</h4>
+            </div>
+            <div class="tasks-container"></div>
+          </div>
+
+          <!-- DONE -->
+          <div class="column-div" data-status="done">
+            <div class="column-head-div">
+              <span class="dot" id="done-dot"></span>
+              <h4 id="doneText" class="columnHeader">DONE (0)</h4>
+            </div>
+            <div class="tasks-container"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <dialog id="task-modal" aria-labelledby="modal-title">
+      <form id="task-form" novalidate>
+        <div class="modal-header">
+          <h3 id="modal-title">Add New Task</h3>
+          <button
+            type="button"
+            class="close-btn"
+            id="close-modal-btn"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+
+        <input type="hidden" id="task-id" name="id" />
+
+        <label for="task-title">Title</label>
+        <input
+          type="text"
+          id="task-title"
+          name="title"
+          placeholder="e.g. Take chilled break"
+        />
+
+        <label for="task-desc">Description</label>
+        <textarea
+          id="task-desc"
+          name="description"
+          rows="4"
+          placeholder="Add more details…"
+        ></textarea>
+
+        <label for="task-status">Status</label>
+        <div class="select-wrap">
+          <select id="task-status" name="status">
+            <option value="todo">todo</option>
+            <option value="doing">doing</option>
+            <option value="done">done</option>
+          </select>
+          <span class="select-chevron">▾</span>
+        </div>
+
+        <label for="task-priority">Priority</label>
+        <div class="select-wrap">
+          <select id="task-priority" name="priority">
+            <option value="low">low</option>
+            <option value="medium" selected>medium</option>
+            <option value="high">high</option>
+          </select>
+          <span class="select-chevron">▾</span>
+        </div>
+
+        <div class="modal-actions">
+          <button id="submit-task-btn" type="submit" class="create-task-btn">
+            Save Changes
+          </button>
+          <button
+            id="delete-task-btn"
+            type="button"
+            class="delete-task-btn"
+            hidden
+          >
+            Delete Task
+          </button>
+        </div>
+
+        <div id="form-error-tip" class="error-tip" hidden>
+          ❗ Please fill out this field.
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
